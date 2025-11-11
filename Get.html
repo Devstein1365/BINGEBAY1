@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started as a BingeBay Channel Provider</title>
-    <link rel="icon" type="image/svg+xml" href="images/BL.svg">
+    <link rel="icon" type="image/svg+xml" href="images/favicon1.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -59,12 +59,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 32px 50px 20px;
             background: rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
             z-index: 100;
             transition: all 0.3s ease;
-            height: 80px;
+            height: 100px;
             box-sizing: border-box;
         }
 
@@ -143,8 +143,9 @@
 
         @media (max-width: 768px) {
             .navbar {
-                padding: 15px 20px;
-                height: 70px;
+                padding-top: 32px;
+                padding-bottom: 18px;
+                height: 100px;
             }
             .nav-links {
                 display: none;
@@ -159,10 +160,28 @@
         }
         @media (max-width: 480px) {
             .navbar {
-                height: 60px;
+                padding-top: 24px;
+                padding-bottom: 12px;
+                height: 70px;
             }
             .btn {
                 width: 100%;
+            }
+        }
+        /* Mobile menu toggle for logo click (like index.html) */
+        @media (max-width: 768px) {
+            .nav-links.mobile-active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.95);
+                z-index: 200;
+                padding: 20px 0;
+                gap: 20px;
+                text-align: center;
             }
         }
 
@@ -635,6 +654,17 @@
                 formContainer.style.opacity = '1';
                 formContainer.style.transform = 'translateY(0)';
             }, 100);
+        });
+
+        // Mobile menu toggle for logo click (like index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            const logo = document.querySelector('.logo');
+            const navLinks = document.querySelector('.nav-links');
+            logo.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.toggle('mobile-active');
+                }
+            });
         });
     </script>
 </body>

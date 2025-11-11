@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingebay - Ready, Set, Binge!</title>
-    <link rel="icon" type="image/svg+xml" href="images/BL.svg">
+    <link rel="icon" type="image/svg+xml" href="images/favicon1.png">
     <style>
         /* All your existing styles remain the same until .hero-section */
         * {
@@ -42,7 +42,6 @@
         :root {
             --header-height: 80px;
         }
-
 
          @media (max-width: 768px) {
             :root {
@@ -161,8 +160,6 @@
                 border-radius: 8px;
             }
         }
-
-
 
         .navbar {
             position: fixed;
@@ -324,6 +321,7 @@
             box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
             position: relative;
             overflow: hidden;
+            text-decoration: none !important;
         }
 
         .btn-primary::before {
@@ -394,17 +392,6 @@
             border-radius: 15px;
             display: block;
         }
-
-       /* .video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            padding-bottom: 56.25%;  16:9 aspect ratio 
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        } */
 
         .video-container iframe {
             position: absolute;
@@ -524,12 +511,20 @@
         }
 
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
+        /* Fluid fallback using auto-fit for smaller widths */
+        @media (max-width: 1100px) {
+            .features {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
         .feature {
             flex: 1 1 220px;
             max-width: 350px;
@@ -689,9 +684,6 @@
         }
 
         /* Add these styles to your existing CSS */
-
-
-        /* Replace .hero-section with these carousel styles */
         .hero-carousel {
             height: 100vh;
             position: relative;
@@ -908,8 +900,145 @@
                 width: 100%;
             }
         }
-        /* Keep all your other existing styles below */
-    </style>
+
+        /* === Responsive fixes for the .features grid (append at end) === */
+        @media (max-width: 1100px) {
+          .features {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+          .features .feature {
+            max-width: 100%;
+            min-width: 0;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .features {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+          }
+          .features .feature {
+            max-width: 100%;
+            min-width: 0;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .features {
+            display: grid !important;
+            grid-template-columns: 1fr;
+            gap: 15px;
+          }
+          .features .feature {
+            max-width: 100%;
+            min-width: 0;
+          }
+        }
+
+        /* Waiting List Section */
+        .waiting-list-section {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #16213e 0%, #0a0a0a 100%);
+        color: #fff;
+        text-align: center;
+        }
+
+        .waiting-list-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 40px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(0, 191, 255, 0.15);
+        }
+
+        .waiting-list-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #ff1493, #00bfff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        }
+
+        .waiting-list-subtitle {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1rem;
+        margin-bottom: 30px;
+        }
+
+        .waiting-list-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        }
+
+        .form-group input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #00bfff;
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Error state */
+        .input-error {
+        border-color: #ff4c4c !important;
+        background: rgba(255, 0, 0, 0.05);
+        }
+
+        /* Success message / Button */
+        .waiting-list-form .btn-primary {
+        width: 100%;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 15px;
+        cursor: pointer;
+        background: linear-gradient(45deg, #ff1493, #00bfff);
+        color: #fff;
+        border: none;
+        transition: all 0.3s ease;
+        }
+
+        .waiting-list-form .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .form-message {
+        margin-top: 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        min-height: 24px;
+        }
+
+        @media (max-width: 600px) {
+        .waiting-list-container {
+            padding: 30px 20px;
+        }
+        .waiting-list-title {
+            font-size: 2rem;
+        }
+        }
+
+
+</style>
     <meta name="description" content="Bingebay is Africa's home for streaming award-winning local series, blockbuster international movies, and exclusive content. Watch anywhere, anytime. Flexible payments. Become a provider.">
     <meta name="keywords" content="Bingebay, streaming, Africa, movies, series, live events, local content, international movies, exclusive, provider, entertainment, TV, video, binge, online, flexible payments, subscribe, watch online">
     <meta name="author" content="Bingebay">
@@ -935,7 +1064,7 @@
         </ul>
         <div class="auth-buttons">
             
-            <a href="Get.html" class="btn btn-signup">Get Started</a>
+            <a href="Get.html" class="btn btn-signup">Become A Provider</a>
         </div>
     </nav>
 
@@ -944,7 +1073,7 @@
         <div class="carousel-slides">
             <!-- Slide 1 -->
             <div class="carousel-slide">
-                <div class="slide-bg" style="background-image: url('images/bing1.png');"></div>
+                <div class="slide-bg" style="background-image: url('images/ab5.png');"></div>
                 <div class="floating-shapes">
                     <div class="shape"></div>
                     <div class="shape"></div>
@@ -965,7 +1094,7 @@
             
             <!-- Slide 2 -->
             <div class="carousel-slide">
-                <div class="slide-bg" style="background-image: url('images/bing3.png');"></div>
+                <div class="slide-bg" style="background-image: url('images/ab11.png');"></div>
                 <div class="floating-shapes">
                     <div class="shape"></div>
                     <div class="shape"></div>
@@ -983,7 +1112,7 @@
             
             <!-- Slide 3 -->
             <div class="carousel-slide">
-                <div class="slide-bg" style="background-image: url('images/bing2.png');"></div>
+                <div class="slide-bg" style="background-image: url('images/ab8.png');"></div>
                 <div class="floating-shapes">
                     <div class="shape"></div>
                     <div class="shape"></div>
@@ -993,7 +1122,7 @@
                     <h1 class="hero-title">Get Started</h1>
                     <h2 class="hero-subtitle">Monetize Your Content</h2>
                     <p class="hero-description">
-                        Binge our exclusive original series you won't find anywhere else.
+                        Earn from your first upload no likes or subscriber limits.
                     </p>
                     <div class="cta-buttons">
                         <a href="Get.html" class="btn btn-primary">Become A Provider</a>
@@ -1023,7 +1152,7 @@
     <section class="video-section">
         <div class="video-container">
             <video controls poster="images/BL.svg">
-                <source src="videos/BingV.mp4" type="video/mp4">
+                <source src="videos/Bing.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -1047,7 +1176,7 @@
             <p class="feature-description">Enjoy award-winning series and blockbuster movies.</p>
         </div>
         <div class="feature">
-            <div class="feature-icon">🎯</div>
+            <div class="feature-icon">🎤</div>
             <h3 class="feature-title">Live Events</h3>
             <p class="feature-description">Stream top events, including concerts, conferences and more.</p>
         </div>
@@ -1061,8 +1190,58 @@
             <h3 class="feature-title">Watch Anywhere</h3>
             <p class="feature-description">Enjoy on your phone, tablet, laptop, or TV.</p>
         </div>
+        <div class="feature">
+            <div class="feature-icon">💵</div>
+            <h3 class="feature-title">Set Your Price</h3>
+            <p class="feature-description">Subscription, pay-per-view, you decide the fee.</p>
+        </div>
+        
+        <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3 class="feature-title">Monetize Instantly</h3>
+            <p class="feature-description">Earn from your first upload no likes or subscriber limits.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">Own Your Channel</h3>
+            <p class="feature-description">Customize your channel look and feel.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📈</div>
+            <h3 class="feature-title">Smart Analytics</h3>
+            <p class="feature-description">Track views, revenue, and audience insights.</p>
+        </div>
     </div>
 </section>
+
+    <!-- Waiting List Section -->
+    <section class="waiting-list-section" id="waitlist">
+    <div class="waiting-list-container">
+        <h2 class="waiting-list-title">Join the Waiting List</h2>
+        <p class="waiting-list-subtitle">
+        Be the first to know when we go live! Sign up below to get exclusive updates.
+        </p>
+
+        <form class="waiting-list-form" id="waitingListForm" novalidate>
+        <div class="form-group">
+            <input type="text" id="wl-name" name="name" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" id="wl-email" name="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="wl-phone" name="phone" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+            <input type="number" id="wl-age" name="age" placeholder="Age" min="10" max="100" required>
+        </div>
+        <button type="submit" class="btn-primary" id="wl-submit">Join Now</button>
+        </form>
+
+        <p id="wl-message" class="form-message" role="alert"></p>
+    </div>
+    </section>
+
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -1137,6 +1316,7 @@
 
 
     <footer>
+        
         <div class="footer-container">
             <div class="footer-column">
                 <div class="logo">
@@ -1149,6 +1329,9 @@
                     </a>
                     <a href="https://x.com/bingebay_?t=zZVkonq2YgeftG6MiwIM_Q&s=09" class="social-link" target="_blank" aria-label="Twitter">
                         <img src="images/x.PNG" alt="Twitter" style="height:24px;width:24px;">
+                    </a>
+                    <a href="https://www.youtube.com/@BingeBayTV" class="social-link" target="_blank" aria-label="Twitter">
+                        <img src="images/yt.jpg" alt="Youtube" style="height:24px;width:24px;">
                     </a>
                 </div>
             </div>
@@ -1313,6 +1496,107 @@
                 });
             });
         });
+
+        // --- WAITING LIST FORM HANDLER (Full Validation + Error Handling) ---
+        document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("waitingListForm");
+        const messageBox = document.getElementById("wl-message");
+        const submitBtn = document.getElementById("wl-submit");
+
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            messageBox.textContent = "";
+            const inputs = form.querySelectorAll("input[required]");
+            let valid = true;
+
+            // Clear previous errors
+            inputs.forEach((input) => input.classList.remove("input-error"));
+
+            // Validation patterns
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = /^[0-9+\s-]{6,}$/;
+
+            inputs.forEach((input) => {
+            const val = input.value.trim();
+
+            if (!val) {
+                valid = false;
+                input.classList.add("input-error");
+            } else if (input.id === "wl-email" && !emailPattern.test(val)) {
+                valid = false;
+                input.classList.add("input-error");
+            } else if (input.id === "wl-phone" && !phonePattern.test(val)) {
+                valid = false;
+                input.classList.add("input-error");
+            } else if (input.id === "wl-age") {
+                const age = parseInt(val, 10);
+                if (isNaN(age) || age < 10 || age > 100) {
+                valid = false;
+                input.classList.add("input-error");
+                }
+            }
+            });
+
+            if (!valid) {
+            messageBox.textContent = "⚠️ Please fill all fields correctly before submitting.";
+            messageBox.style.color = "#ff4c4c";
+            return;
+            }
+
+            // Gather payload
+            const payload = {
+            name: document.getElementById("wl-name").value.trim(),
+            email: document.getElementById("wl-email").value.trim(),
+            phone: document.getElementById("wl-phone").value.trim(),
+            age: document.getElementById("wl-age").value.trim(),
+            };
+
+            // Placeholder for CTO backend API
+            const API_URL = "https://api.bingebay.tv/waitlist"; // replace later
+
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+            messageBox.textContent = "Submitting...";
+            messageBox.style.color = "#00bfff";
+
+            try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 10000);
+
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+                signal: controller.signal,
+            });
+
+            clearTimeout(timeout);
+
+            if (response.ok) {
+                messageBox.textContent = "🎉 Thank you! You’re on the waiting list.";
+                messageBox.style.color = "#00ff88";
+                form.reset();
+            } else {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+            } catch (err) {
+            console.error("Waitlist error:", err);
+            if (err.name === "AbortError") {
+                messageBox.textContent = "⏳ Request timed out. Please try again.";
+                messageBox.style.color = "#ffcc00";
+            } else {
+                messageBox.textContent = "❌ Could not submit form. Please try again later.";
+                messageBox.style.color = "#ff4c4c";
+            }
+            } finally {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = "1";
+            }
+        });
+        });
+
     </script>
 </body>
 </html>

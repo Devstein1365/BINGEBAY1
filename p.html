@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bingebay — Join the Waiting List</title>
+  <link rel="icon" type="image/png" href="images/favicon1.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #fff;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      height: 70px;
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+    }
+
+    /* Hero Section */
+    .hero {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+      background: linear-gradient(135deg, #16213e 0%, #0a0a0a 100%);
+    }
+
+    .hero-content {
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 191, 255, 0.15);
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ff1493, #00bfff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    /* Form Styles */
+    .waiting-list-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-group input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #00bfff;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+    }
+
+    .input-error {
+      border-color: #ff4c4c !important;
+      background: rgba(255, 0, 0, 0.05);
+    }
+
+    /* Button */
+    .btn-primary {
+      width: 100%;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 15px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff1493, #00bfff);
+      color: #fff;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+    }
+
+    .form-message {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      min-height: 24px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      .hero-content {
+        padding: 30px 20px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="#"><img src="images/BL.svg" alt="Bingebay Logo" /></a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Join the Bingebay Waiting List</h1>
+      <p class="hero-subtitle">Be the first to experience Africa’s home for premium entertainment.</p>
+
+      <form class="waiting-list-form" id="waitingListForm" novalidate>
+        <div class="form-group">
+          <input type="text" id="wl-name" name="name" placeholder="Full Name" required />
+        </div>
+        <div class="form-group">
+          <input type="email" id="wl-email" name="email" placeholder="Email Address" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" id="wl-phone" name="phone" placeholder="Phone Number" required />
+        </div>
+        <div class="form-group">
+          <input type="number" id="wl-age" name="age" placeholder="Age" min="10" max="100" required />
+        </div>
+        <button type="submit" class="btn-primary" id="wl-submit">Join Now</button>
+      </form>
+
+      <p id="wl-message" class="form-message" role="alert"></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Bingebay. All rights reserved.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("waitingListForm");
+      const messageBox = document.getElementById("wl-message");
+      const submitBtn = document.getElementById("wl-submit");
+
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        messageBox.textContent = "";
+        const inputs = form.querySelectorAll("input[required]");
+        let valid = true;
+
+        inputs.forEach((input) => input.classList.remove("input-error"));
+
+        // Validation patterns
+        const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        const phonePattern = /^[0-9+\\s-]{6,}$/;
+
+        inputs.forEach((input) => {
+          const val = input.value.trim();
+          if (!val) {
+            valid = false;
+            input.classList.add("input-error");
+          } else if (input.id === "wl-email" && !emailPattern.test(val)) {
+            valid = false;
+            input.classList.add("input-error");
+          } else if (input.id === "wl-phone" && !phonePattern.test(val)) {
+            valid = false;
+            input.classList.add("input-error");
+          } else if (input.id === "wl-age") {
+            const age = parseInt(val, 10);
+            if (isNaN(age) || age < 10 || age > 100) {
+              valid = false;
+              input.classList.add("input-error");
+            }
+          }
+        });
+
+        if (!valid) {
+          messageBox.textContent =
+            "⚠️ Please fill all fields correctly before submitting.";
+          messageBox.style.color = "#ff4c4c";
+          return;
+        }
+
+        // Data payload
+        const payload = {
+          name: document.getElementById("wl-name").value.trim(),
+          email: document.getElementById("wl-email").value.trim(),
+          phone: document.getElementById("wl-phone").value.trim(),
+          age: document.getElementById("wl-age").value.trim(),
+        };
+
+        // Placeholder for your CTO's backend endpoint
+        const API_URL = "https://api.bingebay.tv/waitlist";
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
+        messageBox.textContent = "Submitting...";
+        messageBox.style.color = "#00bfff";
+
+        try {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 10000);
+
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            signal: controller.signal,
+          });
+
+          clearTimeout(timeout);
+
+          if (response.ok) {
+            messageBox.textContent =
+              "🎉 Thank you! You’re officially on the waiting list.";
+            messageBox.style.color = "#00ff88";
+            form.reset();
+          } else {
+            throw new Error("Server error: " + response.status);
+          }
+        } catch (err) {
+          console.error(err);
+          if (err.name === "AbortError") {
+            messageBox.textContent =
+              "⏳ Request timed out. Please try again.";
+            messageBox.style.color = "#ffcc00";
+          } else {
+            messageBox.textContent =
+              "❌ Could not submit form. Please try again later.";
+            messageBox.style.color = "#ff4c4c";
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = "1";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
