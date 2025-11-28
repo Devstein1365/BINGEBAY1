@@ -991,108 +991,6 @@
           min-width: 0;
         }
       }
-
-      /* Waiting List Section */
-      .waiting-list-section {
-        padding: 80px 20px;
-        background: linear-gradient(135deg, #16213e 0%, #0a0a0a 100%);
-        color: #fff;
-        text-align: center;
-      }
-
-      .waiting-list-container {
-        max-width: 600px;
-        margin: 0 auto;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
-        padding: 40px 30px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 25px rgba(0, 191, 255, 0.15);
-      }
-
-      .waiting-list-title {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        background: linear-gradient(45deg, #ff1493, #00bfff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .waiting-list-subtitle {
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 1rem;
-        margin-bottom: 30px;
-      }
-
-      .waiting-list-form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 15px;
-        border-radius: 10px;
-        border: 2px solid transparent;
-        outline: none;
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .form-group input::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      .form-group input:focus {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: #00bfff;
-        box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
-      }
-
-      /* Error state */
-      .input-error {
-        border-color: #ff4c4c !important;
-        background: rgba(255, 0, 0, 0.05);
-      }
-
-      /* Success message / Button */
-      .waiting-list-form .btn-primary {
-        width: 100%;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        padding: 15px;
-        cursor: pointer;
-        background: linear-gradient(45deg, #ff1493, #00bfff);
-        color: #fff;
-        border: none;
-        transition: all 0.3s ease;
-      }
-
-      .waiting-list-form .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
-      }
-
-      .form-message {
-        margin-top: 20px;
-        font-size: 1rem;
-        font-weight: 500;
-        min-height: 24px;
-      }
-
-      @media (max-width: 600px) {
-        .waiting-list-container {
-          padding: 30px 20px;
-        }
-        .waiting-list-title {
-          font-size: 2rem;
-        }
-      }
     </style>
     <meta
       name="description"
@@ -1135,6 +1033,7 @@
       </div>
       <ul class="nav-links"></ul>
       <div class="auth-buttons">
+        <a href="waitlist.html" class="btn btn-login">Join Waitlist</a>
         <a href="Get.html" class="btn btn-signup">Become A Provider</a>
       </div>
     </nav>
@@ -1339,63 +1238,6 @@
       </div>
     </section>
 
-    <!-- Waiting List Section -->
-    <section class="waiting-list-section" id="waitlist">
-      <div class="waiting-list-container">
-        <h2 class="waiting-list-title">Join the Waiting List</h2>
-        <p class="waiting-list-subtitle">
-          Be the first to know when we go live! Sign up below to get exclusive
-          updates.
-        </p>
-
-        <form class="waiting-list-form" id="waitingListForm" novalidate>
-          <div class="form-group">
-            <input
-              type="text"
-              id="wl-name"
-              name="name"
-              placeholder="Full Name"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="email"
-              id="wl-email"
-              name="email"
-              placeholder="Email Address"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="tel"
-              id="wl-phone"
-              name="phone"
-              placeholder="Phone Number"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="number"
-              id="wl-age"
-              name="age"
-              placeholder="Age"
-              min="10"
-              max="100"
-              required
-            />
-          </div>
-          <button type="submit" class="btn-primary" id="wl-submit">
-            Join Now
-          </button>
-        </form>
-
-        <p id="wl-message" class="form-message" role="alert"></p>
-      </div>
-    </section>
-
     <!-- FAQ Section -->
     <section class="faq-section">
       <h2 class="faq-title">Frequently Asked Questions</h2>
@@ -1524,6 +1366,7 @@
           <h3 class="footer-heading">Navigation</h3>
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
+            <li><a href="waitlist.html">Join Waitlist</a></li>
             <li><a href="Get.html">Become a provider</a></li>
           </ul>
         </div>
@@ -1696,104 +1539,6 @@
       if (SUPABASE_URL && SUPABASE_ANON_KEY) {
         supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
-
-      // --- WAITING LIST FORM HANDLER (Supabase Integration) ---
-      document.addEventListener("DOMContentLoaded", () => {
-        const form = document.getElementById("waitingListForm");
-        const messageBox = document.getElementById("wl-message");
-        const submitBtn = document.getElementById("wl-submit");
-
-        if (!form) return;
-
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          messageBox.textContent = "";
-          const inputs = form.querySelectorAll("input[required]");
-          let valid = true;
-
-          // Clear previous errors
-          inputs.forEach((input) => input.classList.remove("input-error"));
-
-          // Validation patterns
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          const phonePattern = /^[0-9+\s-]{6,}$/;
-
-          inputs.forEach((input) => {
-            const val = input.value.trim();
-
-            if (!val) {
-              valid = false;
-              input.classList.add("input-error");
-            } else if (input.id === "wl-email" && !emailPattern.test(val)) {
-              valid = false;
-              input.classList.add("input-error");
-            } else if (input.id === "wl-phone" && !phonePattern.test(val)) {
-              valid = false;
-              input.classList.add("input-error");
-            } else if (input.id === "wl-age") {
-              const age = parseInt(val, 10);
-              if (isNaN(age) || age < 10 || age > 100) {
-                valid = false;
-                input.classList.add("input-error");
-              }
-            }
-          });
-
-          if (!valid) {
-            messageBox.textContent =
-              "⚠️ Please fill all fields correctly before submitting.";
-            messageBox.style.color = "#ff4c4c";
-            return;
-          }
-
-          // Check if Supabase is configured
-          if (!supabaseClient) {
-            messageBox.textContent = "⚠️ Database not configured.";
-            messageBox.style.color = "#ffcc00";
-            return;
-          }
-
-          // Gather data for Supabase
-          const formData = {
-            name: document.getElementById("wl-name").value.trim(),
-            email: document.getElementById("wl-email").value.trim(),
-            phone: document.getElementById("wl-phone").value.trim(),
-            age: parseInt(document.getElementById("wl-age").value.trim(), 10),
-          };
-
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = "0.7";
-          messageBox.textContent = "Submitting...";
-          messageBox.style.color = "#00bfff";
-
-          try {
-            // Insert into Supabase
-            const { data, error } = await supabaseClient
-              .from('waitlist')
-              .insert([formData])
-              .select();
-
-            if (error) {
-              if (error.code === '23505') {
-                throw new Error('This email is already registered in the waitlist.');
-              }
-              throw error;
-            }
-
-            messageBox.textContent =
-              "🎉 Thank you! You're on the waiting list.";
-            messageBox.style.color = "#00ff88";
-            form.reset();
-          } catch (err) {
-            console.error("Waitlist error:", err);
-            messageBox.textContent = err.message || "❌ Could not submit form. Please try again later.";
-            messageBox.style.color = "#ff4c4c";
-          } finally {
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = "1";
-          }
-        });
-      });
     </script>
   </body>
 </html>
